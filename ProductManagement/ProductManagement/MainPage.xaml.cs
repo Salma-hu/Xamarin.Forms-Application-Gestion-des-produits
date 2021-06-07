@@ -1,21 +1,24 @@
-﻿using ProductManagement.Models;
+﻿using Plugin.Media;
+using Plugin.Media.Abstractions;
+using ProductManagement.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace ProductManagement
 {
     public partial class MainPage : ContentPage
     {
+        
+        public string _ImageFile { get; set; }
+
         public MainPage()
         {
             InitializeComponent();
-        }
+            
 
+        }
+       
         protected async override void OnAppearing()
         {
             //base.OnAppearing();
@@ -25,6 +28,8 @@ namespace ProductManagement
             if (produitList != null)
             {
                 lstProduits.ItemsSource = produitList.ToList();
+                
+
             }
         }
         private async void BtnAdd_Clicked(object sender, EventArgs e)
@@ -36,6 +41,7 @@ namespace ProductManagement
                     Name = txtName.Text,
                     Description = txtDescription.Text,
                     Price = Convert.ToInt32(txtPrice.Text),
+                    Image = _ImageFile
 
 
                 };
@@ -130,6 +136,34 @@ namespace ProductManagement
             {
                 await DisplayAlert("Required", "Please Enter ProduitID", "OK");
             }
+        }
+
+
+
+        private async void UploadImage_Clicked(object sender, EventArgs e)
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                await DisplayAlert("Error", "Upload not supported on this device", "Cancel");
+                return;
+            }
+
+            var file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+            {
+                PhotoSize = PhotoSize.Full,
+                CompressionQuality = 40
+            });
+
+            _ImageFile = file.Path;
+
+            // Convert file to byre array, to bitmap and set it to our ImageView
+
+            //byte[] imageArray = System.IO.File.ReadAllBytes(file.Path);
+            //Bitmap bitmap = BitmapFactory.DecodeByteArray(imageArray, 0, imageArray.Length);
+            //thisImageView.SetImageBitmap(bitmap);
+
         }
 
     }

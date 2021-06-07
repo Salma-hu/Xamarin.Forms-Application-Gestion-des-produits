@@ -8,19 +8,23 @@
             <StackLayout HorizontalOptions="Center" VerticalOptions="Start">
                 <Image x:Name="imgBanner" Source="banner.png" ></Image>
                 <Image Margin="0,0,0,10" HeightRequest="100" Source="SQLite.png" ></Image>
-                <Label Margin="0,0,0,10" Text="SQLite" FontAttributes="Bold" FontSize="Large" TextColor="Gray" HorizontalTextAlignment="Center" ></Label>
+                <Label Margin="0,0,0,10" Text="Product Management" FontAttributes="Bold" FontSize="Large" TextColor="Gray" HorizontalTextAlignment="Center" ></Label>
                 <Entry x:Name="txtProduitId" Placeholder="ProduitId Update and Delete"></Entry>
                 <Entry x:Name="txtName" Placeholder="Enter Produit Name"></Entry>
                 <Entry x:Name="txtDescription" Placeholder="Enter Produit Description"></Entry>
                 <Entry x:Name="txtPrice" Placeholder="Enter Produit Price"></Entry>
                 <StackLayout  HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                    <Button x:Name="btnAdd" WidthRequest="200" Text="Add" Clicked="BtnAdd_Clicked" />
-                    <Button x:Name="btnRead" WidthRequest="200" Text="Read" Clicked="BtnRead_Clicked" />
+                    <Button x:Name="btnAdd" WidthRequest="200" BackgroundColor="#1168fc" Text="Add" Clicked="BtnAdd_Clicked" />
+                    <Button x:Name="btnRead" WidthRequest="200" BackgroundColor="#1168fc" Text="Read" Clicked="BtnRead_Clicked" />
                 </StackLayout>
                 <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                    <Button x:Name="btnUpdate" WidthRequest="200" Text="Update" Clicked="BtnUpdate_Clicked"/>
-                    <Button x:Name="btnDelete" WidthRequest="200" Text="Delete" Clicked="BtnDelete_Clicked" />
+                    <Button x:Name="btnUpdate" WidthRequest="200" BackgroundColor="#1168fc" Text="Update" Clicked="BtnUpdate_Clicked"/>
+                    <Button x:Name="btnDelete" WidthRequest="200" BackgroundColor="#1168fc" Text="Delete" Clicked="BtnDelete_Clicked" />
+                    
+                    
                 </StackLayout>
+
+                <Button x:Name="btnUpload" WidthRequest="200" BackgroundColor="#11fcbb" TextColor="#fff" Text="Upload photo" Clicked="UploadImage_Clicked" />
                 <!--<ListView  x:Name="lstProduits">
                     <ListView.HeaderTemplate>
                         <DataTemplate>
@@ -69,12 +73,11 @@
                     </ListView.ItemTemplate>
                 </ListView>-->
 
-
-                <ListView x:Name="lstProduits" HasUnevenRows="True"  >
+                <ListView x:Name="lstProduits" BackgroundColor="#060606" HasUnevenRows="True"  >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell >
-                                <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#060606">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"></RowDefinition>
@@ -89,6 +92,10 @@
                                         <Label Text="{Binding Name}"   Grid.Row="0" Grid.Column="1" />
                                         <Label Text="{Binding Description}" Grid.Row="0" Grid.Column="2" />
                                         <Label Text="{Binding Price}" Grid.Row="0" Grid.Column="3" />
+                                        <Image Source="{Binding Image}" WidthRequest="100" Margin="0,0,10,0" />
+                                        
+                                        
+                                            
                                     </Grid>
                                 </Frame>
                             </ViewCell>
